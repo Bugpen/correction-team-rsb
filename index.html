@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>correction  team rsb</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="app-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <!-- Logo Section -->
+    <div class="logo">
+      <span class="icon">👥</span>
+      <span class="text">RUIRU<br><strong>MEDIA HOUSE</strong></span>
+    </div>
+
+    <!-- Hamburger Icon (always visible under logo) -->
+    <div class="hamburger" onclick="toggleNav()">☰</div>
+
+    <!-- Navigation Section -->
+    <nav class="navigation-menu" id="mobileNav">
+      <ul>
+        <li><a href="#" id="homeBtn">🏠 Home</a></li>
+        <li><a href="#" id="sermonsBtn">🗣 Sermons LIVE</a></li>
+        <li><a href="#" id="entertainmentBtn">🎬 Entertainment</a></li>
+        <li><a href="#" id="bibleStudyBtn">📖 Bible Study</a></li>
+        <li style="display:none;">🎵 Gospel Music</li>
+        <li><a href="#" id="eventsBtn">📅 Events</a></li>
+        <li><a href="#" id="announcementsBtn">📢 Announcement</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <header class="topbar">
+      <input type="text" placeholder="Search sermons, events..." />
+      <button id="uploadBtn" class="upload-button">📤 Upload</button>
+    </header>
+
+    <!-- Dynamic content area -->
+    <section id="content-area">
+      <h2>Welcome to Ruiru Media House</h2>
+      <p>Add live streams, music, videos, or Bible study materials here.</p>
+    </section>
+  </div>
+</div>
+
+<!-- Upload Modal -->
+<div id="uploadModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('uploadModal').style.display='none'">&times;</span>
+    <h3>Upload Content</h3>
+    <label for="categorySelect">Select Category:</label>
+    <select id="categorySelect">
+      <option value="sermons">Sermons LIVE</option>
+      <option value="entertainment">Entertainment</option>
+      <option value="biblestudy">Bible Study</option>
+    </select>
+
+    <label for="uploadType">Upload Type:</label>
+    <select id="uploadType" onchange="toggleUploadFields()">
+      <option value="youtube">YouTube Video</option>
+      <option value="device">Upload from Device</option>
+    </select>
+
+    <div id="youtubeFields">
+      <input type="text" id="videoTitle" placeholder="Enter Title" /><br />
+      <input type="text" id="youtubeId" placeholder="Enter YouTube Video ID" /><br />
+    </div>
+
+    <div id="deviceFields" style="display: none;">
+      <input type="file" id="videoFile" accept="video/*" /><br />
+    </div>
+
+    <button onclick="handleUpload()">Upload</button>
+  </div>
+</div>
+
+<script>
+function toggleUploadFields() {
+  const type = document.getElementById("uploadType").value;
+  document.getElementById("youtubeFields").style.display = type === "youtube" ? "block" : "none";
+  document.getElementById("deviceFields").style.display = type === "device" ? "block" : "none";
+}
+
+// Show upload modal
+uploadBtn.onclick = function() {
+  document.getElementById("uploadModal").style.display = 'block';
+}
+
+// Toggle navigation menu when hamburger is clicked
+function toggleNav() {
+  const nav = document.getElementById("mobileNav");
+  if (nav.style.display === "block") {
+    nav.style.display = "none";
+  } else {
+    nav.style.display = "block";
+  }
+}
+
+// Events calendar setup
+document.getElementById("eventsBtn").addEventListener("click", function() {
+  document.getElementById("content-area").innerHTML = `
+    <h2>🗓 Events Calendar</h2>
+    <iframe src="https://calendar.google.com/calendar/embed?src=en.kenyan%23holiday%40group.v.calendar.google.com&ctz=Africa%2FNairobi" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+  `;
+});
+
+// Announcements section
+document.getElementById("announcementsBtn").addEventListener("click", function() {
+  document.getElementById("content-area").innerHTML = `
+    <h2>📢 Announcements</h2>
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr><th style="border-bottom: 1px solid #ccc; padding: 8px;">Date</th><th style="border-bottom: 1px solid #ccc; padding: 8px;">Event</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 8px;">2025-04-12</td><td style="padding: 8px;">Team Meeting</td></tr>
+        <tr><td style="padding: 8px;">2025-04-15</td><td style="padding: 8px;">Youth Outreach</td></tr>
+      </tbody>
+    </table>
+  `;
+});
+</script>
+<!-- partial -->
+  <script src='https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js'></script>
+<script src='https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js'></script>
+<script src='https://www.gstatic.com/firebasejs/9.6.1/firebase.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
